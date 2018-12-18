@@ -40,12 +40,11 @@
 # it: if it has 12 digits, it's probably a UPC. Enter the first 11 digits into your program and 
 # see if you get the 12th.
 
-upc=->s{->(a,b){->c{c==0?0:10%c==0?0:10-c}[((a.sum*3)+b.sum)%10]}[*(s.rjust(11,"0").split("").map(&:to_i).partition.zip(1.step){|d,i|i.even?})]}
+upc=->s{->(a,b){->c{c==0?0:10%c==0?0:10-c}[((a.sum*3)+b.sum)%10]}[*(s.rjust(11,"0").split("").map(&:to_i).partition.with_index{|d,i|i.even?})]}
 
 pp upc.call("03600029145")==2
 pp upc.call("4210000526")==4
 pp upc.call("3600029145")==2
 pp upc.call("12345678910")==4
 pp upc.call("1234567")==0
-# pp upc("1234567")==0
 
