@@ -28,14 +28,11 @@
 # Note that balanced_bonus behaves differently than balanced for a few inputs, e.g. "x".
 
 def balanced(string)
-  split_string = string.split("")
-  split_string.count("x") == split_string.count("y")
+  string.split("").instance_eval { count("x") == count("y") }
 end
 
 def balanced_bonus(string)
-  split_string = string.split("")
-  letters = split_string.uniq
-  letters.map { |l| split_string.count(l) }.uniq.count == 1 || split_string.length == 0
+  string.split("").instance_eval { uniq.map { |l| count(l) }.uniq.count == 1 || length == 0 }
 end
 
 puts [balanced("xxxyyy") == true,
